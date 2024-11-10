@@ -37,6 +37,9 @@ class PlayerController extends Controller
                 // ziyaretçiyi güncelle
                 $player->save();
 
+                // session a atama
+                session(['auth_player_uuid' => $player->uuid]);
+
                 // return true
                 return response()->json([
                     'alert' => [

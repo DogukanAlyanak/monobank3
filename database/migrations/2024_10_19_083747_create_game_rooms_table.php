@@ -17,6 +17,7 @@ return new class extends Migration
             // columns
             $table->uuid('uuid')->index()->unique();
             $table->string('invite_code')->unique();
+            $table->foreignId('owner_player_id')->nullable()->constrained('players')->cascadeOnDelete();
 
             // most columns
             $table->timestamps();
