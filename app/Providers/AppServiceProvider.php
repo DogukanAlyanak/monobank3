@@ -20,13 +20,14 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {    
-        //
-    }
-
-    public function routeBindings(): void{
-        Route::model('gameRoom', function ($value) {
-            return GameRoom::findAny($value);
+    {
+        // Move route binding logic here
+        Route::bind('gameRoom', function ($value) {
+            $gameRoom = GameRoom::findAny($value); // Use custom finder
+            if (!$gameRoom) {
+                abort(404, 'Game Room not found.');
+            }
+            return $gameRoom;
         });
     }
 }

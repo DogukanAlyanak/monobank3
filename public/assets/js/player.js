@@ -3,6 +3,10 @@ $(document).ready(function () {
   createPlayerUuid()
 })
 
+$(document).on(`click`, `.change-player-name`, function() {
+    $(`#authPlayerModal`).modal(`show`);
+})
+
 
 function createPlayerUuid() {
   let player_uuid = getLocalStorageItem('player_uuid');
@@ -21,7 +25,10 @@ function createPlayerUuid() {
 
       if (player_name.length < 1) {
         $(`#authPlayerModal`).modal('show');
-      }
+
+    }
+    $(`.player-name`).html(player_name);
+    $(`#authPlayerNameInput`).val(player_name);
     },
     error: function (xhr) {
       console.log('Error:', xhr);
@@ -34,7 +41,7 @@ function createPlayerUuid() {
 
 document.getElementById('saveAuthPlayer').addEventListener('submit', function (event) {
   event.preventDefault(); // Formun sayfayı yenilemesini önler
-  
+
   let player_uuid = getLocalStorageItem('player_uuid');
   let player_name = document.getElementById('authPlayerNameInput').value;
 
@@ -48,6 +55,8 @@ document.getElementById('saveAuthPlayer').addEventListener('submit', function (e
     success: function (response) {
       setLocalStorageItem('player_name', player_name);
       $(`#authPlayerModal`).modal('hide');
+      $(`.player-name`).html(player_name);
+      $(`#authPlayerNameInput`).val(player_name);
     },
     error: function (xhr) {
       console.log('Error:', xhr);

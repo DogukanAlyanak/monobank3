@@ -22,7 +22,7 @@ class PlayerController extends Controller
                 ]);
 
                 // kullanıcı kayıtlıysa
-                $player = Player::where('uuid', $request->input('uuid'))->first();
+                $player = Player::where('uuid', $request->input('player_uuid'))->first();
 
                 // kullanıcı kayıtlı değilse
                 if (is_null($player)) {
@@ -74,7 +74,7 @@ class PlayerController extends Controller
                 ]);
 
 
-                $player = Player::where('uuid', $request->input('uuid'))->first();
+                $player = Player::where('uuid', $request->input('player_uuid'))->first();
 
                 if (! is_null($player)) {
                     $player->name = $request->input('player_name');
